@@ -1,0 +1,8 @@
+python-telegram-bot==21.0
+requests
+pandas
+numpy
+ccxt
+yfinance
+ta
+schedule
