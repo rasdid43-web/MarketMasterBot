@@ -1,7 +1,8 @@
+import os
 from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
+from telegram.ext import Application, CommandHandler, ContextTypes
 
-TOKEN = "@Rr147258-"
+TOKEN = os.getenv("TOKEN")
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
@@ -12,8 +13,20 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "/forex - تحليل الفوركس"
     )
 
-app = ApplicationBuilder().token(TOKEN).build()
+async def gold(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text("📈 تحليل الذهب قريباً...")
+
+async def crypto(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text("🪙 تحليل العملات الرقمية قريباً...")
+
+async def forex(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text("💱 تحليل الفوركس قريباً...")
+
+app = Application.builder().token(TOKEN).build()
 
 app.add_handler(CommandHandler("start", start))
+app.add_handler(CommandHandler("gold", gold))
+app.add_handler(CommandHandler("crypto", crypto))
+app.add_handler(CommandHandler("forex", forex))
 
 app.run_polling()
